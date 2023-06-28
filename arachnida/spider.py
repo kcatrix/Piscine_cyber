@@ -1,3 +1,4 @@
+import re
 import sys
 import os
 import pprint
@@ -14,10 +15,26 @@ def download_file(url, dst_path):
     except urllib.error.URLError as e:
         print(e)
 
+def get_image_tags(url):
+    # Effectuer une requête GET pour obtenir le contenu de la page
+    response = urllib.request.urlopen(url)
+    
+    # Vérifier si la requête a réussi
+    if response.status == 200:
+         html_content = response.read().decode('utf-8')
+         image_urls = re.findall(r'(?i)(https?://\S+\.(?:jpg|png|gif|jpeg|bmp))', html_content)
+         return image_urls
+    
+    # Si la requête a échoué, retourner une liste vide
+    return []
+
 def take_img(url, path):
     i = 0
     type_img = ["jpg", "png", "gif", "jpeg", "bmp"]
-    download_file(url, path + "img " + str(i))
+    img_tags = get_image_tags(url)
+    
+    print (img_tags)
+    # download_file(url, path + "img " + str(i))
     
 
 take_img(sys.argv[1], "img/")
