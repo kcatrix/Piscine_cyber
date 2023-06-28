@@ -7,6 +7,7 @@ import urllib.error
 import urllib.request
 
 def download_file(url, dst_path):
+    dst_path = dst_path + os.path.splitext(url)[1]
     try:
         with urllib.request.urlopen(url) as web_file:
             data = web_file.read()
@@ -31,11 +32,10 @@ def get_image_tags(url):
 def take_img(url, path):
     i = 0
     img_tags = get_image_tags(url)
-    download_file(img_tags[1], path + "img_" + str(i))
-    i += 1
-        
-    
-    print (img_tags)
+    for img in img_tags:
+         download_file(img_tags[i], path + "img_" + str(i))
+         i += 1
+    print(img_tags)
     # download_file(url, path + "img " + str(i))
     
 
