@@ -31,7 +31,7 @@ def get_image_tags(url):
 def take_img(url, path):
     i = 0
     img_tags = get_image_tags(url)
-    download_file(img_tags[1], path + "img " + str(i))
+    download_file(img_tags[1], path + "img_" + str(i))
     i += 1
         
     
