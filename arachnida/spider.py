@@ -30,8 +30,10 @@ def get_image_tags(url):
 
 def take_img(url, path):
     i = 0
-    type_img = ["jpg", "png", "gif", "jpeg", "bmp"]
     img_tags = get_image_tags(url)
+    download_file(img_tags[1], path + "img " + str(i))
+    i += 1
+        
     
     print (img_tags)
     # download_file(url, path + "img " + str(i))
